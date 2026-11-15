@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avenado OS</title>
+<meta name="description" content="Avenado OS — the company operating system for the Avenado team.">
+<meta name="author" content="Avenado">
+<meta property="og:title" content="Avenado OS">
+<meta property="og:description" content="The company operating system for the Avenado team.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0F172A">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles/app.css">
+<script>
+  // Theme must apply before paint to avoid a flash of the wrong theme.
+  (function () {
+    try {
+      var saved = localStorage.getItem('avenado-os:theme');
+      var mode = saved || 'system';
+      var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.classList.toggle('dark', dark);
+      document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme-mode', mode);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+  <div id="root"></div>
+  <!-- Your own Supabase project's URL + anon key. Copy public/config.example.js to
+       public/config.js and fill it in — see SUPABASE_SETUP.md. Missing entirely (a fresh
+       checkout before that step) is fine: the app shows a setup screen instead of crashing. -->
+  <script src="config.js" onerror="window.__AVENADO_CONFIG_MISSING__ = true"></script>
+  <script type="module" src="bundle.js"></script>
+</body>
+</html>
